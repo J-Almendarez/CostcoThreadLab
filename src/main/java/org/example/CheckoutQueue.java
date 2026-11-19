@@ -7,4 +7,7 @@ public class CheckoutQueue {
 
         return 0;
     }
+
+    public void blockingPut(int customerId) {
+    }
 }

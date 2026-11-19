@@ -18,5 +18,31 @@ public class Customer implements Runnable {
     @Override
     public void run() {
 
+        try {
+            // shopping time is between 1-5 secs
+            int shoppingTime = 1000 + generator.nextInt(5000);
+
+            System.out.printf(
+                    "Customer %d is shopping.%n", customerId
+            );
+
+            Thread.sleep(shoppingTime);
+
+            System.out.printf(
+                    "Customer %d finished shopping and joined the checkout line.%n",
+                    customerId
+            );
+
+            // joinning the checkout queue
+            queue.blockingPut(customerId);
+
+        }
+        catch (InterruptedException exception) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    public int getCustomerId() {
+        return customerId;
     }
 }
